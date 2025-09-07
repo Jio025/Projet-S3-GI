@@ -17,18 +17,21 @@ class Fetcher {
 
         DockerConfig dockerConfig = new DockerConfig();
 
-        dockerConfig.setBaseImage("Ubuntu:20.04");
+        dockerConfig.setBaseImage("ubuntu:20.04");
 
         List<String> packageListString = new ArrayList<>();
         packageListString.add("python3");
+        packageListString.add("python3-pip");
         packageListString.add("golang");
+        packageListString.add("fortune");
         dockerConfig.setPackages(packageListString);
 
         List<String> commandsListString = new ArrayList<>();
-        commandsListString.add("pip install flask");
-        commandsListString.add("pip install numpy");
+        commandsListString.add("pip3 install flask");
+        commandsListString.add("pip3 install numpy");
         dockerConfig.setCommands(commandsListString);
 
+        System.out.println("Fetcher Task Ended");
         return dockerConfig;
     }
 }

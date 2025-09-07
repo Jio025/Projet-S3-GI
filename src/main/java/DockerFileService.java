@@ -7,6 +7,10 @@
 public class DockerFileService {
     private Fetcher fetcher;
     private Builder builder;
+    public DockerFileService(Fetcher fetcher, Builder builder) {
+        this.fetcher = fetcher;
+        this.builder = builder;
+    }
 
     void generateDockerFile(int configId){
         DockerConfig config = fetcher.fetchConfig(configId);
