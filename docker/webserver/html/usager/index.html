@@ -105,6 +105,19 @@
             span.innerHTML = '<br> <strong>' + "Aucun message" + '</strong> </br>'
         }
 
+                function toggleButtons(folderId) {
+                const hiddenButtons = document.getElementById(folderId);
+                if (hiddenButtons.style.display === 'none') {
+                hiddenButtons.style.display = 'block';
+            } else {
+                hiddenButtons.style.display = 'none';
+            }
+            }
+
+        function showMessage(letter) {
+            const messageContainer = document.getElementById('messageContainer');
+            messageContainer.innerHTML = 'Tu as cliqué sur le bouton ' + letter;
+        }
         function logout() {
          //   let logoutURL = "http://localhost:8080//realms/usager/protocol/openid-connect/logout"
          //   window.location.href = logoutURL;
@@ -117,6 +130,48 @@
 <button onclick="requestStudent()">Étudiant?</button>
 <button onclick="requestTeacher()">Enseignant?</button>
 <button onclick="requestMessage()">Message app2?</button>
+
+
+<button onclick="toggleButtons('folder1')">Session 1 GEGIGRO</button>
+<button onclick="toggleButtons('folder2')">Session 2 GEGI</button>
+<button onclick="toggleButtons('folder3')">Session 3 GI</button>
+
+<div id="folder1" style="display:none;">
+    <button onclick="showMessage('S1-APP1-SN')">APP1-SN</button>
+    <button onclick="showMessage('S1-APP1-TETITO')">APP1-TETITO</button>
+    <button onclick="showMessage('S1-APP2-SN')">APP2-SN</button>
+    <button onclick="showMessage('S1-APP2-TO')">APP2-TO</button>
+    <button onclick="showMessage('S1APP3')">APP3</button>
+    <button onclick="showMessage('S1APP4')">APP4</button>
+    <button onclick="showMessage('S1APP5a')">APP5a</button>
+    <button onclick="showMessage('S1APP5b')">APP5b</button>
+    <button onclick="showMessage('S1APP6')">APP6</button>
+</div>
+
+<div id="folder2" style="display:none;">
+    <button onclick="showMessage('S2APP1')">APP1</button>
+    <button onclick="showMessage('S2APP2')">APP2</button>
+    <button onclick="showMessage('S2APP3-GE')">APP3-GE</button>
+    <button onclick="showMessage('S2APP3-GI')">APP3-GI</button>
+    <button onclick="showMessage('S2APP4')">APP4</button>
+    <button onclick="showMessage('S2APP5-GE')">APP5-GE</button>
+    <button onclick="showMessage('S2APP5-GI')">APP5-GI</button>
+    <button onclick="showMessage('S2APP6')">APP6</button>
+    <button onclick="showMessage('S2APP7-GE')">APP7-GE</button>
+    <button onclick="showMessage('S2APP7-GI')">APP7-GI</button>
+</div>
+
+<div id="folder3" style="display:none;">
+    <button onclick="showMessage('S3APP1')">APP1</button>
+    <button onclick="showMessage('S3APP2')">APP2</button>
+    <button onclick="showMessage('S3APP3')">APP3</button>
+    <button onclick="showMessage('S3APP4')">APP4</button>
+    <button onclick="showMessage('S3APP5')">APP5</button>
+    <button onclick="showMessage('S3APP6')">APP6</button>
+</div>
+
+<p id="messageContainer"></p>
+
 <div id="title">
     <span></span>
 </div>
