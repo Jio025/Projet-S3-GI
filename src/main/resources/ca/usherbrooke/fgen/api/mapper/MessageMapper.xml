@@ -80,4 +80,8 @@
         on conflict (id) do update set description = excluded.description;
     </insert>
 
+    <select id="choose" resultType="Integer">
+        select id from app.message where id = #{id}
+    </select>
+
 </mapper>
