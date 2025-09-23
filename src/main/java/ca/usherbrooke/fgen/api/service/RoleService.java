@@ -54,6 +54,26 @@ public class RoleService {
         p.last_name = (String)this.jwt.getClaim("family_name");
         p.first_name = (String)this.jwt.getClaim("given_name");
         p.email = (String)this.jwt.getClaim("email");
+        p.programme = (String)this.jwt.getClaim("programme");
+        p.session = (String)this.jwt.getClaim("session");
+        p.profile = (String)this.jwt.getClaim("profile");
+        Map realmAccess = (Map)this.jwt.getClaim("realm_access");
+        if (realmAccess != null && realmAccess.containsKey("roles")) {
+            p.roles = (List)realmAccess.get("roles");
+        }
+        System.out.println(p);
+        return p;
+    }
+
+    @GET
+    @Path("/admin")
+    @RolesAllowed({"admin"})
+    public Person admin() {
+        Person p = new Person();
+        p.cip = this.securityContext.getUserPrincipal().getName();
+        p.last_name = (String)this.jwt.getClaim("family_name");
+        p.first_name = (String)this.jwt.getClaim("given_name");
+        p.email = (String)this.jwt.getClaim("email");
         Map realmAccess = (Map)this.jwt.getClaim("realm_access");
         if (realmAccess != null && realmAccess.containsKey("roles")) {
             p.roles = (List)realmAccess.get("roles");

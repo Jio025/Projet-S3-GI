@@ -7,6 +7,9 @@
       "firstName": "Julianne",
       "lastName": "Chartier",
       "email": "chaj8063@usherbrooke.ca",
+      "programme": "GI",
+      "session": "s3",
+      "profile": "SN",
       "realmRoles": [
         "student",
         "default-roles-master"
@@ -25,6 +28,9 @@
       "firstName": "Juliette",
       "lastName": "Cordey",
       "email": "corj3819@usherbrooke.ca",
+      "programme": "GE",
+      "session": "s1",
+      "profile": "TE",
       "realmRoles": [
         "student",
         "default-roles-master"
@@ -43,6 +49,9 @@
       "firstName": "Ludwig-Emmanuel",
       "lastName": "Dufour",
       "email": "dufl5093@usherbrooke.ca",
+      "programme": "GI",
+      "session": "s1",
+      "profile": "SN",
       "realmRoles": [
         "student",
         "default-roles-master"
@@ -61,6 +70,9 @@
       "firstName": "Mathis",
       "lastName": "Ménard",
       "email": "menm2390@usherbrooke.ca",
+      "programme": "GI",
+      "session": "s1",
+      "profile": "TI",
       "realmRoles": [
         "student",
         "default-roles-master"
@@ -79,6 +91,9 @@
       "firstName": "Yannick",
       "lastName": "Nault",
       "email": "nauy2982@usherbrooke.ca",
+      "programme": "GI",
+      "session": "s5",
+      "profile": "SN",
       "realmRoles": [
         "student",
         "default-roles-master"
@@ -98,7 +113,7 @@
       "lastName": "Savard",
       "email": "savs1805@usherbrooke.ca",
       "realmRoles": [
-        "student",
+        "admin",
         "default-roles-master"
       ],
       "credentials": [

@@ -7,6 +7,9 @@ public class Person {
     public String last_name;
     public String first_name;
     public String email;
+    public String programme;
+    public String session;
+    public String profile;
     public List roles;
 
     public String toString() {
