@@ -36,10 +36,7 @@
                         '<br> <strong>' + response.data.last_name + '</strong> </br>' +
                         '<br> <strong>' + response.data.first_name + '</strong> </br>' +
                         '<br> <strong>' + response.data.email + '</strong> </br>' +
-                        '<br> <strong>' + response.data.roles + '</strong> </br>' +
-                        '<br> <strong>' + response.data.programme + '</strong> </br>' +
-                        '<br> <strong>' + response.data.session + '</strong> </br>' +
-                        '<br> <strong>' + response.data.profile + '</strong> </br>'
+                        '<br> <strong>' + response.data.roles + '</strong> </br>'
                 })
                 .catch(function (error) {
                     console.log('refreshing');
@@ -66,10 +63,7 @@
                         '<br> <strong>' + response.data.last_name + '</strong> </br>' +
                         '<br> <strong>' + response.data.first_name + '</strong> </br>' +
                         '<br> <strong>' + response.data.email + '</strong> </br>' +
-                        '<br> <strong>' + response.data.roles + '</strong> </br>' +
-                        '<br> <strong>' + response.data.programme + '</strong> </br>' +
-                        '<br> <strong>' + response.data.session + '</strong> </br>' +
-                        '<br> <strong>' + response.data.profile + '</strong> </br>'
+                        '<br> <strong>' + response.data.roles + '</strong> </br>'
                 })
                 .catch(function (error) {
                     console.log('refreshing');
@@ -111,22 +105,22 @@
             span.innerHTML = '<br> <strong>' + "Aucun message" + '</strong> </br>'
         }
 
-        function toggleButtons(folderId) {
-            const hiddenButtons = document.getElementById(folderId);
-            if (hiddenButtons.style.display === 'none') {
+                function toggleButtons(folderId) {
+                const hiddenButtons = document.getElementById(folderId);
+                if (hiddenButtons.style.display === 'none') {
                 hiddenButtons.style.display = 'block';
             } else {
                 hiddenButtons.style.display = 'none';
             }
-        }
+            }
 
         function showMessage(letter) {
             const messageContainer = document.getElementById('messageContainer');
             messageContainer.innerHTML = 'Tu as cliqué sur le bouton ' + letter;
         }
         function logout() {
-            //   let logoutURL = "http://localhost:8080//realms/usager/protocol/openid-connect/logout"
-            //   window.location.href = logoutURL;
+         //   let logoutURL = "http://localhost:8080//realms/usager/protocol/openid-connect/logout"
+         //   window.location.href = logoutURL;
         }
 
 
