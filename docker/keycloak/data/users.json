@@ -256,6 +256,9 @@
       "firstName": "Alexis",
       "lastName": "Chénier",
       "email": "chea1492@usherbrooke.ca",
+      "programme": "GI",
+      "session": "s3",
+      "profile": "SN",
       "realmRoles": [
         "student",
         "default-roles-master"
@@ -310,6 +313,9 @@
       "firstName": "Elyes",
       "lastName": "Ismail",
       "email": "isme2473@usherbrooke.ca",
+      "programme": "GI",
+      "session": "s3",
+      "profile": "SN",
       "realmRoles": [
         "student",
         "default-roles-master"
