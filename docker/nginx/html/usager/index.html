@@ -122,7 +122,34 @@
          //   let logoutURL = "http://localhost:8080//realms/usager/protocol/openid-connect/logout"
          //   window.location.href = logoutURL;
         }
+        function requestDaddy() {
+            const input = document.getElementById('idInput');
+            const id = parseInt(input.value);
 
+            const span = document.querySelector('#title span');
+
+            if (isNaN(id) || id <= 0) {
+                alert('Please enter a valid ID!');
+                return;
+            }
+
+            // Make the API call with the Keycloak token
+            axios.get(`http://localhost:8888//api/daddy/${id}`, {
+                headers: {
+                    'Authorization': 'Bearer ' + keycloak.token
+                }
+            })
+                .then(function(response) {
+                    console.log("Response:", response.status);
+
+                    // Display the returned message
+                    span.innerHTML = `<br><strong>Message:</strong> ${response.data}</br>`;
+                })
+                .catch(function(error) {
+                    console.error(error);
+                    span.innerHTML = '<br><strong>Failed to fetch message or unauthorized</strong></br>';
+                });
+        }
 
     </script>
 </head>
@@ -133,7 +160,11 @@
 <button onclick="requestTeacher()">YAML?</button>
 <button onclick="requestMessage()"></button>
 
+<button onclick="requestDaddy()">Daddy?</button>
 
+<label for="idInput">Enter ID:</label>
+<input type="number" id="idInput" value="42" min="1" />
+    
 <button onclick="toggleButtons('folder1')">Session 1 GEGIGRO</button>
 <button onclick="toggleButtons('folder2')">Session 2 GEGI</button>
 <button onclick="toggleButtons('folder3')">Session 3 GI</button>
