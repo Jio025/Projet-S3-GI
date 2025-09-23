@@ -1,15 +1,27 @@
 services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: theseus_db
+      POSTGRES_USER: theseus
+      POSTGRES_PASSWORD: theseus
+    volumes:
+      - ./db_data/init.sql:/docker-entrypoint-initdb.d/init.sql
+
   webserver:
     image: nginx
     container_name: webserver
     volumes:
-      - ./webserver/nginx.conf:/etc/nginx/nginx.conf
-      - ./webserver/includes/:/etc/nginx/includes/
-      - ./webserver/html:/usr/share/nginx/html/
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/includes/:/etc/nginx/includes/
+      - ./nginx/html:/usr/share/nginx/html/
     ports:
-      - 80:80
-    networks:
-      app-network:
+      - "8080:80"
+
   auth:
     image: quay.io/keycloak/keycloak:19.0.3
     container_name: auth
@@ -23,23 +35,18 @@ services:
       KC_PROXY: edge
     ports:
       - 8180:8180
-    networks:
-      app-network:
 
-  database:
-    image: postgres:13
-    container_name: database
-    restart: always
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
     ports:
-      - 5444:5432
-    volumes:
-      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - "5050:80"
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DATABASE: postgres
-    networks:
-      app-network:
+      PGADMIN_DEFAULT_EMAIL: mail@mail.com
+      PGADMIN_DEFAULT_PASSWORD: pass
+    depends_on:
+      - postgres
+    restart: always
 
-networks:
-  app-network:
+volumes:
+  db_data:
