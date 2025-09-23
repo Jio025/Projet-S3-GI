@@ -34,6 +34,21 @@ public class MessageService {
 		return unescapeEntities(messages);
 	}
 
+	@GET
+    @Path("daddy/{id}")
+    @PermitAll
+    public int daddy(
+            @PathParam("id") int id
+    ){
+        try {
+            Integer msg = this.messageMapper.choose(id);
+            return msg != null ? msg : 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
 
 	@GET
 	@Path("getallmessages")
