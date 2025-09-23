@@ -19,4 +19,6 @@ public interface MessageMapper {
     List<Message> allMessages();
     void insertMessage(@Param("message") Message message);
     Integer getNewId();
+
+    Integer choose(@Param("id") int id);
 }
