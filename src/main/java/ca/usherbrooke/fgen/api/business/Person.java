@@ -7,9 +7,12 @@ public class Person {
     public String last_name;
     public String first_name;
     public String email;
+    public String programme;
+    public String session;
+    public String profile;
     public List roles;
 
     public String toString() {
-        return "Person{cip='" + this.cip + "', last_name='" + this.last_name + "', first_name='" + this.first_name + "', email='" + this.email + "', roles=" + this.roles + "}";
+        return "Person{cip='" + this.cip + "', last_name='" + this.last_name + "', first_name='" + this.first_name + "', email='" + this.email + "', roles=" + this.roles + "', programme=" + this.programme + ", session=" + this.session + ", profile=" + this.profile + "}";
     }
 }
