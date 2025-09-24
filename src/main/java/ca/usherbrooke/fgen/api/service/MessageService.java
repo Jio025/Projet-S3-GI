@@ -3,6 +3,7 @@ package ca.usherbrooke.fgen.api.service;
 import ca.usherbrooke.fgen.api.business.Message;
 import ca.usherbrooke.fgen.api.mapper.MessageMapper;
 import jakarta.annotation.security.PermitAll;
+import jakarta.ws.rs.core.Response;
 import org.apache.ibatis.annotations.Param;
 import org.jsoup.parser.Parser;
 
@@ -35,18 +36,62 @@ public class MessageService {
 		return unescapeEntities(messages);
 	}
 
+    //TODO: Changer ces API pour qu'ils marchent avec la nouvelle DB
+    //donc aussi changer les fichiers MessageMapper.java ET MessageMapper.xml
     @GET
     @Path("daddy/{id}")
-    @PermitAll
     public int daddy(
             @PathParam("id") int id
     ){
+
         try {
             Integer msg = this.messageMapper.choose(id);
             return msg != null ? msg : 0;
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
+        }
+    }
+
+    // retourne le URL du Dockerfile sur le Git
+    @GET
+    @Path("dockerfiles/id/{dockerfileID}")
+    public String getDockerfileURL(@PathParam("dockerfileID") int id) {
+        String contents = this.messageMapper.getDockerfileURL(id);
+        if (contents == null || contents.trim().isEmpty()) {
+            throw new WebApplicationException(404);
+        }
+        return contents;
+    }
+
+    // retourne soit le contenu du dockerfile en format
+    // texte, ou bien le dockerfile lui meme sous format
+    // Response. Je pense que Response est mieux comme
+    // ca on peut faire un download ET une visualisation
+    //TODO: verifier la facon de fetch
+    @GET
+    @Path("dockerfiles/url/{URL}")
+    public String getDockerfile(@PathParam("URL") String URL) {
+        //TODO: implementer le fetch des dockerfiles
+        return "a";
+    }
+
+
+    @PUT
+    @Path("ajouterDockerfile/{id}/{tagId}/{hash}/{path}/{description}")
+    public int ajouterDockerfile(
+            @PathParam("id") int id,
+            @PathParam("tagId") int tagId,
+            @PathParam("hash") String hash,
+            @PathParam("path") String path,
+            @PathParam("description") String description
+    ){
+        try {
+            int lignes = this.messageMapper.ajouterDockerfile(id, tagId, hash, path, description);
+            return lignes > 0 ? lignes : 1; //success
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1; //failure
         }
     }
 

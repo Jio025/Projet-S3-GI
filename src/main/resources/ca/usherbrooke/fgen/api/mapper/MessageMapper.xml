@@ -80,8 +80,28 @@
         on conflict (id) do update set description = excluded.description;
     </insert>
 
+    <!--TODO: changer cette methode -->
     <select id="choose" resultType="Integer">
         select id from app.message where id = #{id}
     </select>
+
+    <!--TODO: valider ceci -->
+    <insert id="ajouterDockerfile">
+        insert into theseus.dockerfiles(
+                    ID_Dockerfile,
+                    PATH,
+                    Hash,
+                    tag_id,
+                    Description
+        )
+        values (
+                    #{dockerfile.ID_Dockerfile},
+                    #{dockerfile.PATH},
+                    #{dockerfile.Hash},
+                    #{dockerfile.tag_id},
+                    #{dockerfile.Description}
+               )
+            on conflict (ID_Dockerfile) do nothing;
+    </insert>
 
 </mapper>
