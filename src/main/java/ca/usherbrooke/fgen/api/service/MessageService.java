@@ -2,12 +2,14 @@ package ca.usherbrooke.fgen.api.service;
 
 import ca.usherbrooke.fgen.api.business.Message;
 import ca.usherbrooke.fgen.api.mapper.MessageMapper;
+import jakarta.ws.rs.core.Response;
 import org.apache.ibatis.annotations.Param;
 import org.jsoup.parser.Parser;
 
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,6 +36,30 @@ public class MessageService {
 		return unescapeEntities(messages);
 	}
 
+    @GET
+    @Path("getDockerfile/{dockerfileID}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response getDockerfile(@PathParam("dockerfileID") String id) {
+        DockerfileFetcherService fetcher = new DockerfileFetcherService();
+        try {
+
+            String dockerfilePath = this.messageMapper.getDockerfilePath(id);
+            String dockerFileContents = fetcher.dockerfileFetch(dockerfilePath);
+
+            if (dockerFileContents != null && !dockerFileContents.isEmpty()) {
+                return Response.ok(dockerFileContents).build();
+            } else {
+                return Response.status(Response.Status.NOT_FOUND)
+                        .entity("Dockerfile not found for ID: " + id)
+                        .build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Error retrieving Dockerfile: " + e.getMessage())
+                    .build();
+        }
+    }
 
 	@GET
 	@Path("getallmessages")

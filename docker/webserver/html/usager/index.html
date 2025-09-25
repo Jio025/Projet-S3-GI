@@ -122,14 +122,29 @@
          //   let logoutURL = "http://localhost:8080//realms/usager/protocol/openid-connect/logout"
          //   window.location.href = logoutURL;
         }
-
+        function requestDockerfile(dockerfileID){
+            // Make the API call with the Keycloak token
+            axios.get(`http://localhost:8888/api/getDockerfile/${dockerfileID}`, {
+                headers: {
+                    'Authorization': 'Bearer ' + keycloak.token
+                }
+            })
+                .then(function(response) {
+                    console.log("Response:", response.status);
+                    const textarea = document.getElementById("dockerfileOutput");
+                    // Display the returned message
+                    textarea.innerHTML = `${response.data}`;
+                })
+                .catch(function(error) {
+                    console.error(error);
+                    const textarea = document.getElementById("dockerfileOutput");
+                    textarea.innerHTML = 'Failed to fetch message or unauthorized';
+                });
+        }
 
     </script>
 </head>
 <body onload="initKeycloak()">
-<button onclick="requestStudent()">Étudiant?</button>
-<button onclick="requestTeacher()">Enseignant?</button>
-<button onclick="requestMessage()">Message app2?</button>
 
 
 <button onclick="toggleButtons('folder1')">Session 1 GEGIGRO</button>
@@ -137,7 +152,7 @@
 <button onclick="toggleButtons('folder3')">Session 3 GI</button>
 
 <div id="folder1" style="display:none;">
-    <button onclick="showMessage('S1-APP1-SN')">APP1-SN</button>
+    <button onclick="requestDockerfile('S1APP1SN')">APP1-SN</button>
     <button onclick="showMessage('S1-APP1-TETITO')">APP1-TETITO</button>
     <button onclick="showMessage('S1-APP2-SN')">APP2-SN</button>
     <button onclick="showMessage('S1-APP2-TO')">APP2-TO</button>
@@ -168,6 +183,12 @@
     <button onclick="showMessage('S3APP4')">APP4</button>
     <button onclick="showMessage('S3APP5')">APP5</button>
     <button onclick="showMessage('S3APP6')">APP6</button>
+</div>
+
+<div id="textarea">
+    <label>
+    <textarea id="dockerfileOutput" rows="20" cols="80" readonly></textarea>
+    </label>
 </div>
 
 <p id="messageContainer"></p>

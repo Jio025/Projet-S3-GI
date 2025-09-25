@@ -19,4 +19,5 @@ public interface MessageMapper {
     List<Message> allMessages();
     void insertMessage(@Param("message") Message message);
     Integer getNewId();
+    String getDockerfilePath(@Param("id") String id);
 }
